@@ -67,7 +67,7 @@
  
  ```
  
-##Result
+## Result
 
 
 
@@ -81,39 +81,39 @@
 * The greedy matching algorithm is straightforward and easy to understand. It iteratively selects edges for matching by checking if neither vertex is already matched, making it conceptually simple.
 **Efficiency**
 
-*The algorithm works efficiently by processing each edge only once. The use of a HashSet for tracking matched vertices ensures constant-time checks, allowing for rapid selection.
+* The algorithm works efficiently by processing each edge only once. The use of a HashSet for tracking matched vertices ensures constant-time checks, allowing for rapid selection.
 
 **Randomization**
 
-*The inclusion of random shuffling within each partition helps reduce bias in edge selection, ensuring a fair distribution of matches across partitions.
+* The inclusion of random shuffling within each partition helps reduce bias in edge selection, ensuring a fair distribution of matches across partitions.
  
 **Parallel Processing**
 
-*The algorithm is designed to work seamlessly with distributed computing frameworks like Apache Spark, leveraging partitions and caching to handle large datasets efficiently.
+* The algorithm is designed to work seamlessly with distributed computing frameworks like Apache Spark, leveraging partitions and caching to handle large datasets efficiently.
 
 ### Maximal Matching
 
 **Comprehensive**
 
-*The maximal matching algorithm aims to produce a valid and maximal matching by ensuring that all selected edges form a subset of the input graph and that no vertex has a degree greater than 1.
+* The maximal matching algorithm aims to produce a valid and maximal matching by ensuring that all selected edges form a subset of the input graph and that no vertex has a degree greater than 1.
 
 **Direct Approach**
 
-*The algorithm directly iterates over edges and vertices, filtering them to produce a matching. This eliminates the need for random shuffling or additional processing steps, making it more streamlined.
+* The algorithm directly iterates over edges and vertices, filtering them to produce a matching. This eliminates the need for random shuffling or additional processing steps, making it more streamlined.
 
 **Explicit Checks**
 
-*The algorithm includes explicit checks for independent and maximal properties, ensuring that each vertex is part of the matching or has a neighbor that is. This provides strong guarantees for the output.
+* The algorithm includes explicit checks for independent and maximal properties, ensuring that each vertex is part of the matching or has a neighbor that is. This provides strong guarantees for the output.
 
 
 ## Comparison
 
 **Greedy Matching**
-*Offers simplicity, efficiency, and adaptability, making it suitable for general graph matching tasks. However, its time complexity can increase significantly with the logarithmic factor.
+* Offers simplicity, efficiency, and adaptability, making it suitable for general graph matching tasks. However, its time complexity can increase significantly with the logarithmic factor.
 
 ** Maximal Matching**
 
-*Provides comprehensive and balanced processing, ensuring valid and maximal matchings while maintaining linear time complexity, particularly suitable for balanced or edge-dominated graphs.
+* Provides comprehensive and balanced processing, ensuring valid and maximal matchings while maintaining linear time complexity, particularly suitable for balanced or edge-dominated graphs.
 
 ** Use Cases**
 
@@ -125,13 +125,13 @@
 
 ### General Maximal Matching / Greedy Matching
 
-*For "balanced" datasets, a general maximal matching algorithm is preferred. This ensures accurate coverage, allowing for more comprehensive results without compromising integrity. This approach ensures that each matching solution is valid and maximal, meaning no further edges can be added without violating the properties of a matching.
+* For "balanced" datasets, a general maximal matching algorithm is preferred. This ensures accurate coverage, allowing for more comprehensive results without compromising integrity. This approach ensures that each matching solution is valid and maximal, meaning no further edges can be added without violating the properties of a matching.
 
 ### Luby's Algorithm
 
-*For larger datasets, particularly those in the realm of big data, Luby's algorithm can be used. This allows for more efficient processing by compromising some accuracy to provide a raw estimate.
+* For larger datasets, particularly those in the realm of big data, Luby's algorithm can be used. This allows for more efficient processing by compromising some accuracy to provide a raw estimate.
 
-** Efficient Convergence **
+**Efficient Convergence**
 
 *The algorithm converges quickly because it iteratively reduces the set of active vertices, making the graph sparser with each iteration. This leads to fewer vertices to process in subsequent iterations, accelerating convergence.
 
