@@ -117,8 +117,8 @@
 
 **Use Cases**
 
-*Greedy Matching: Works well for general, distributed tasks or when simplicity is prioritized.
-*Maximal Matching: Suited for applications requiring valid and maximal matchings with explicit checks, such as scheduling or optimization.
+* Greedy Matching: Works well for general, distributed tasks or when simplicity is prioritized.
+* Maximal Matching: Suited for applications requiring valid and maximal matchings with explicit checks, such as scheduling or optimization.
 
 ## What if new dataset
 
@@ -133,5 +133,5 @@
 
 **Efficient Convergence**
 
-*The algorithm converges quickly because it iteratively reduces the set of active vertices, making the graph sparser with each iteration. This leads to fewer vertices to process in subsequent iterations, accelerating convergence.
+* The algorithm converges quickly because it iteratively reduces the set of active vertices, making the graph sparser with each iteration. This leads to fewer vertices to process in subsequent iterations, accelerating convergence.
 
