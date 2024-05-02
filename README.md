@@ -1,82 +1,137 @@
-# Large Scale Data Processing: Final Project
-## Graph matching
-For the final project, you are provided 6 CSV files, each containing an undirected graph, which can be found [here](https://drive.google.com/file/d/1khb-PXodUl82htpyWLMGGNrx-IzC55w8/view?usp=sharing). The files are as follows:  
+# Large Scale Data Processing: Final Project Report
+## Graph matching Result from Using the LubyMIS & Greedy
 
-|           File name           |        Number of edges       |
-| ------------------------------| ---------------------------- |
-| com-orkut.ungraph.csv         | 117185083                    |
-| twitter_original_edges.csv    | 63555749                     |
-| soc-LiveJournal1.csv          | 42851237                     |
-| soc-pokec-relationships.csv   | 22301964                     |
-| musae_ENGB_edges.csv          | 35324                        |
-| log_normal_100.csv            | 2671                         |  
+## Approach
 
-Your goal is to compute a matching as large as possible for each graph. 
+###Blossom Algorithm
 
-### Input format
-Each input file consists of multiple lines, where each line contains 2 numbers that denote an undirected edge. For example, the input below is a graph with 3 edges.  
-1,2  
-3,2  
-3,4  
+* At first, based on the research, we was planning to implement the Blossom Algorithm for the matching. The Blossom algorithm effectively computes maximum matchings for graphs represented in input files, where each line details an undirected edge between two vertices. Upon reading the graph data, the algorithm operates by identifying "blossoms," which are odd cycles within the graph that need to be contracted to simplify the structure. Through iterative processing, it searches for augmenting paths that can increase the size of the existing matching. By repeatedly applying these steps—contracting blossoms and finding augmenting paths—the algorithm ensures the matching is as large as possible, leveraging advanced graph theory techniques to handle complex graph structures efficiently.However, as we learned and tested it out, the whole process consumes a huge amount of time, which it has the O(n^3). 
 
-### Output format
-Your output should be a CSV file listing all of the matched edges, 1 on each line. For example, the ouput below is a 2-edge matching of the above input graph. Note that `3,4` and `4,3` are the same since the graph is undirected.  
-1,2  
-4,3  
+###LubyMIS
 
-### No template is provided
-For the final project, you will need to write everything from scratch. Feel free to consult previous projects for ideas on structuring your code. That being said, you are provided a verifier that can confirm whether or not your output is a matching. As usual, you'll need to compile it with
+* The LubyMIS algorithm operates by having each node in the graph randomly select itself with a certain probability, while simultaneously checking if its neighbors have also chosen themselves. If a node selects itself and none of its neighbors do, it joins the independent set. This decision is communicated to all neighboring nodes to prevent them from joining the set if they haven’t already made the same decision. This process repeats in synchronous rounds across the entire graph, with nodes that have not yet decided continuing to select themselves randomly. The algorithm typically converges quickly, within O(logn) rounds, producing a maximal independent set efficiently.
+
+* We are still working with it based on the foudation of project 3. 
+
+### Maximal Matching (O(E+V)):
+1. ```maximalMatching(graph: Graph[Int, Int]): List[(Long, Long)]```
+
+**Purpose**: Finds a maximal matching in a graph.
+**Method**: Collects all edges, filters by unmatched vertex pairs, and maintains a set of matched vertices.
+**Output**: List of edges that form the maximal matching.
+
+2. ```saveMatching(matching: List[(Long, Long)], outputFile: String)```
+**Purpose**: Saves the matching to a CSV file.
+**Method**: Converts matching list to DataFrame, then writes to file using DataFrame operations.
+**Output**: CSV file containing the matching pairs.
+
+3. ```verifyMatching(graph: Graph[Int, Int]): Boolean```
+**Purpose**: Verifies if the matching is independent and maximal.
+**Method**: Uses flatMap to check for independent edges and join operations to ensure all unmatched vertices are adjacent to matched vertices.
+**Output**: Boolean indicating if the matching meets criteria.
+
+###Greedy Algorithm (O(ElogE)) : 
+* The Greedy Matching algorithm works as follows:
+* Initialization
+1. **Vertex Tracking**: A data structure is initialized to keep track of which vertices have been matched. This structure is crucial for ensuring that no vertex is part of more than one matching edge.
+2. **Edge Sorting**: The input graph is preprocessed to sort its edges in a randomized order. This preprocessing ensures each execution of the algorithm can yield different results and prevents any inherent bias in the order of the edges.
+
+* Processing the Edges
+1. The algorithm processes each edge from the sorted list one by one.
+2. For each edge:
+   - **Vertex Check**: The source and destination vertices of the edge are checked to see if they have been matched.
+   - **Edge Matching**: If both vertices are unmatched, the edge is eligible to be part of the matching:
+     - The edge is added to the final matching result.
+     - Both vertices are marked as matched so they cannot be part of any subsequent edges.
+
+* Result Compilation
+1. **Collecting Results**: The matched edges are collected from the algorithm's execution.
+2. **Output**: The matched edges, which now form the maximal matching set, are returned or saved as the output.
+
+##Code Compile
+
+###Run commands:
+
+ *Maximal Matching:
 ```
-sbt clean package
-```  
-The verifier accepts 2 file paths as arguments, the first being the path to the file containing the initial graph and the second being the path to the file containing the matching. It can be ran locally with the following command (keep in mind that your file paths may be different):
-```
-// Linux
-spark-submit --master local[*] --class final_project.verifier target/scala-2.12/project_3_2.12-1.0.jar /data/log_normal_100.csv data/log_normal_100_matching.csv
 
-// Unix
-spark-submit --master "local[*]" --class "final_project.verifier" target/scala-2.12/project_3_2.12-1.0.jar data/log_normal_100.csv data/log_normal_100_matching.csv
 ```
 
-## Deliverables
-* The output file (matching) for each test case.
-  * For naming conventions, if the input file is `XXX.csv`, please name the output file `XXX_matching.csv`.
-  * You'll need to compress the output files into a single ZIP or TAR file before pushing to GitHub. If they're still too large, you can upload the files to Google Drive and include the sharing link in your report.
-* The code you've applied to produce the matchings.
-  * You should add your source code to the same directory as `verifier.scala` and push it to your repository.
-* A project report that includes the following:
-  * A table containing the size of the matching you obtained for each test case. The sizes must correspond to the matchings in your output files.
-  * An estimate of the amount of computation used for each test case. For example, "the program runs for 15 minutes on a 2x4 N1 core CPU in GCP." If you happen to be executing mulitple algorithms on a test case, report the total running time.
-  * Description(s) of your approach(es) for obtaining the matchings. It is possible to use different approaches for different cases. Please describe each of them as well as your general strategy if you were to receive a new test case.
-  * Discussion about the advantages of your algorithm(s). For example, does it guarantee a constraint on the number of shuffling rounds (say `O(log log n)` rounds)? Does it give you an approximation guarantee on the quality of the matching? If your algorithm has such a guarantee, please provide proofs or scholarly references as to why they hold in your report.
-* A 10-minute presentation during class time on 5/2 (Thu).
-  * Note that the presentation date is before the final project submission deadline. This means that you could still be working on the project when you present. You may present the approaches you're currently trying. You can also present a preliminary result, like the matchings you have at the moment.
+ *Greedy:
+ ```
+ 
+ ```
+ 
+ *Verify:
+ ```
+ 
+ ```
+ 
+##Result
 
-## Grading policy
-* Quality of matchings (40%)
-  * For each test case, you'll receive at least 70% of full credit if your matching size is at least half of the best answer in the class.
-  * **You will receive a 0 for any case where the verifier does not confirm that your output is a matching.** Please do not upload any output files that do not pass the verifier.
-* Project report (35%)
-  * Your report grade will be evaluated using the following criteria:
-    * Discussion of the merits of your algorithms such as the theoretical merits (i.e. if you can show your algorithm has certain guarantee).
-    * Depth of technicality
-    * Novelty
-    * Completeness
-    * Readability
-* Presentation (15%)
-* Formatting (10%)
-  * If the format of your submission does not adhere to the instructions (e.g. output file naming conventions), points will be deducted in this category.
 
-## Submission via GitHub
-Delete your project's current **README.md** file (the one you're reading right now) and include your report as a new **README.md** file in the project root directory. Have no fear—the README with the project description is always available for reading in the template repository you created your repository from. For more information on READMEs, feel free to visit [this page](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-readmes) in the GitHub Docs. You'll be writing in [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown). Be sure that your repository is up to date and you have pushed all of your project's code. When you're ready to submit, simply provide the link to your repository in the Canvas assignment's submission.
 
-## You must do the following to receive full credit:
-1. Create your report in the ``README.md`` and push it to your repo.
-2. In the report, you must include your (and any partner's) full name in addition to any collaborators.
-3. Submit a link to your repo in the Canvas assignment.
 
-## Early submission bonus
-The deadline of the final project is on 5/4 (Friday) 11:59PM. 
-**If you submit by 5/3 (Thu) 11:59PM, you will get 5% boost on the final project grade.**
-The submission time is calculated from the last commit in the Git log.
-**No extension beyond 5/4 11:59PM will be granted, even if you have unused late days.**
+## Advantages
+
+###Greedy Algorithm
+
+ **Simplicity**
+
+* The greedy matching algorithm is straightforward and easy to understand. It iteratively selects edges for matching by checking if neither vertex is already matched, making it conceptually simple.
+**Efficiency**
+
+*The algorithm works efficiently by processing each edge only once. The use of a HashSet for tracking matched vertices ensures constant-time checks, allowing for rapid selection.
+
+**Randomization**
+
+*The inclusion of random shuffling within each partition helps reduce bias in edge selection, ensuring a fair distribution of matches across partitions.
+ 
+**Parallel Processing**
+
+*The algorithm is designed to work seamlessly with distributed computing frameworks like Apache Spark, leveraging partitions and caching to handle large datasets efficiently.
+
+### Maximal Matching
+
+**Comprehensive**
+
+*The maximal matching algorithm aims to produce a valid and maximal matching by ensuring that all selected edges form a subset of the input graph and that no vertex has a degree greater than 1.
+
+**Direct Approach**
+
+*The algorithm directly iterates over edges and vertices, filtering them to produce a matching. This eliminates the need for random shuffling or additional processing steps, making it more streamlined.
+
+**Explicit Checks**
+
+*The algorithm includes explicit checks for independent and maximal properties, ensuring that each vertex is part of the matching or has a neighbor that is. This provides strong guarantees for the output.
+
+
+## Comparison
+
+**Greedy Matching**
+*Offers simplicity, efficiency, and adaptability, making it suitable for general graph matching tasks. However, its time complexity can increase significantly with the logarithmic factor.
+
+**Maximal Matching**
+
+*Provides comprehensive and balanced processing, ensuring valid and maximal matchings while maintaining linear time complexity, particularly suitable for balanced or edge-dominated graphs.
+
+**Use Cases**
+
+*Greedy Matching: Works well for general, distributed tasks or when simplicity is prioritized.
+*Maximal Matching: Suited for applications requiring valid and maximal matchings with explicit checks, such as scheduling or optimization.
+
+## What if new dataset
+
+
+### General Maximal Matching / Greedy Matching
+
+*For "balanced" datasets, a general maximal matching algorithm is preferred. This ensures accurate coverage, allowing for more comprehensive results without compromising integrity. This approach ensures that each matching solution is valid and maximal, meaning no further edges can be added without violating the properties of a matching.
+
+### Luby's Algorithm
+
+*For larger datasets, particularly those in the realm of big data, Luby's algorithm can be used. This allows for more efficient processing by compromising some accuracy to provide a raw estimate.
+
+** Efficient Convergence **
+
+*The algorithm converges quickly because it iteratively reduces the set of active vertices, making the graph sparser with each iteration. This leads to fewer vertices to process in subsequent iterations, accelerating convergence.
+
