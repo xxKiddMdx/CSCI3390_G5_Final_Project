@@ -111,11 +111,11 @@
 **Greedy Matching**
 * Offers simplicity, efficiency, and adaptability, making it suitable for general graph matching tasks. However, its time complexity can increase significantly with the logarithmic factor.
 
-** Maximal Matching**
+**Maximal Matching**
 
 * Provides comprehensive and balanced processing, ensuring valid and maximal matchings while maintaining linear time complexity, particularly suitable for balanced or edge-dominated graphs.
 
-** Use Cases**
+**Use Cases**
 
 *Greedy Matching: Works well for general, distributed tasks or when simplicity is prioritized.
 *Maximal Matching: Suited for applications requiring valid and maximal matchings with explicit checks, such as scheduling or optimization.
