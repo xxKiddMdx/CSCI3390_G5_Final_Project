@@ -102,7 +102,7 @@ object main {
 
         saveMatching(matchedEdges, args(2))
 
-      case "luby" if args.length == 3 =>
+      case "mm" if args.length == 3 =>
         val startTimeMillis = System.currentTimeMillis()
 
         val matchedEdges = maximalMatching(graph)
@@ -110,7 +110,7 @@ object main {
         val endTimeMillis = System.currentTimeMillis()
         val durationSeconds = (endTimeMillis - startTimeMillis) / 1000
         println("==================================")
-        println(s"Luby's Matching Algorithm completed in $durationSeconds s.")
+        println(s"Maximal Matching Algorithm completed in $durationSeconds s.")
         println("==================================")
 
         saveMatching(matchedEdges, args(2))
@@ -142,3 +142,4 @@ object main {
     }
   }
 }
+
