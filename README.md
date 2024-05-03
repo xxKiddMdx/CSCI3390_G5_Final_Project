@@ -16,27 +16,27 @@
 ### Maximal Matching (O(E+V)):
 1. ```maximalMatching(graph: Graph[Int, Int]): List[(Long, Long)]```
 
-**Purpose**: Finds a maximal matching in a graph.
+   **Purpose**: Finds a maximal matching in a graph.
 
-**Method**: Collects all edges, filters by unmatched vertex pairs, and maintains a set of matched vertices.
+   **Method**: Collects all edges, filters by unmatched vertex pairs, and maintains a set of matched vertices.
 
-**Output**: List of edges that form the maximal matching.
+   **Output**: List of edges that form the maximal matching.
 
 2. ```saveMatching(matching: List[(Long, Long)], outputFile: String)```
 
-**Purpose**: Saves the matching to a CSV file.
+   **Purpose**: Saves the matching to a CSV file.
 
-**Method**: Converts matching list to DataFrame, then writes to file using DataFrame operations.
+   **Method**: Converts matching list to DataFrame, then writes to file using DataFrame operations.
 
-**Output**: CSV file containing the matching pairs.
+   **Output**: CSV file containing the matching pairs.
 
-4. ```verifyMatching(graph: Graph[Int, Int]): Boolean```
+3. ```verifyMatching(graph: Graph[Int, Int]): Boolean```
 
-**Purpose**: Verifies if the matching is independent and maximal.
+   **Purpose**: Verifies if the matching is independent and maximal.
 
-**Method**: Uses flatMap to check for independent edges and join operations to ensure all unmatched vertices are adjacent to matched vertices.
+   **Method**: Uses flatMap to check for independent edges and join operations to ensure all unmatched vertices are adjacent to matched vertices.
 
-**Output**: Boolean indicating if the matching meets criteria.
+   **Output**: Boolean indicating if the matching meets criteria.
 
 ### Greedy Algorithm (O(ElogE)) : 
 * The Greedy Matching algorithm works as follows:
