@@ -54,14 +54,12 @@
 
  *Maximal Matching:
 ```
-spark-submit --master "local[*]" --driver-memory 20G --executor-memory 20G --conf "spark.executor.memoryOverhead=1024" --conf "spark.driver.maxResultSize=4g" --conf "spark.network.timeout=600s" --conf "spark.executor.heartbeatInterval=120s" --class "final_project.main" target/scala-2.12/project_3_2.12-1.0.jar mm
-[path_to_graph] [path_to_output]
+spark-submit --master "local[*]" --driver-memory 20G --executor-memory 20G --conf "spark.executor.memoryOverhead=1024" --conf "spark.driver.maxResultSize=4g" --conf "spark.network.timeout=600s" --conf "spark.executor.heartbeatInterval=120s" --class "final_project.main" target/scala-2.12/project_3_2.12-1.0.jar mm [path_to_graph] [path_to_output]
 ```
 
  *Greedy:
  ```
- spark-submit --master "local[*]" --driver-memory 20G --executor-memory 20G --conf "spark.executor.memoryOverhead=1024" --conf "spark.driver.maxResultSize=4g" --conf "spark.network.timeout=600s" --conf "spark.executor.heartbeatInterval=120s" --class "final_project.main" target/scala-2.12/project_3_2.12-1.0.jar greedy ```
-[path_to_graph] [path_to_output]
+ spark-submit --master "local[*]" --driver-memory 20G --executor-memory 20G --conf "spark.executor.memoryOverhead=1024" --conf "spark.driver.maxResultSize=4g" --conf "spark.network.timeout=600s" --conf "spark.executor.heartbeatInterval=120s" --class "final_project.main" target/scala-2.12/project_3_2.12-1.0.jar greedy [path_to_graph] [path_to_output]
  ```
  
  *Verify:
