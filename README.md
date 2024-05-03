@@ -1,4 +1,5 @@
-# Large Scale Data Processing: Final Project Report - Graph matching Result from Using the LubyMIS & Greedy
+# Large Scale Data Processing: Final Project Report
+### Graph matching Result from Using the LubyMIS & Greedy
 
 ## Approach
 
