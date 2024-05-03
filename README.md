@@ -74,6 +74,7 @@ spark-submit --master "local[*]" --driver-memory 20G --executor-memory 20G --con
  ```
 
 ## Result
+
 | Algorithm | log_normal_100.csv | musae_ENGB_edges.csv | soc-pokec-relationships.csv | soc-LiveJournal1.csv | twitter_original_edges.csv | com-orkut.ungraph.csv |
 |-----------|---------------------|----------------------|------------------------------|-----------------------|----------------------------|-----------------------|
 | MaximalMatching Reported | 50 | 2460 | 584490 | 1527497 | 91747 | 1321378 |
@@ -82,6 +83,12 @@ spark-submit --master "local[*]" --driver-memory 20G --executor-memory 20G --con
 | Greedy Reported | 50 | 2266 | 588210 | 1545781 | 91782 | 1325656 |
 | Greedy Verified | 50 | 2266 | 588210 | 1545781 | 91782 | 1325656 |
 | Greedy Time Consumption | 0.20s in local machine | 0.27s in local machine | 3s in local machine | 6s in local machine (16GB) | 9s in local machine (16GB) | 14s in local machine (20GB) |
+
+
+* Both algorithms show identical results for "reported" and "verified," which confirms no false positives in the output.
+* The runtime of the Greedy algorithm is O(ElogE), while Maximal Matching has a complexity of O(V+E). However, the measured times do not fully align with these complexities because the Maximal Matching algorithm's timing includes both processing and writing times, whereas Greedy's timing only includes processing.
+* Based on the result, the MaximalMatching would only outperform for some small scale of data. It is clear to see that, with a larger dataset, the Greedy Algorithm outperforms the MaximalMatching algorithm.
+
 
 
 ## Advantages
