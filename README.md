@@ -45,8 +45,8 @@
         - Both vertices are marked as matched so they cannot be part of any subsequent edges.
 
 * Result Compilation
-1. **Collecting Results**: The matched edges are collected from the algorithm's execution.
-2. **Output**: The matched edges, which now form the maximal matching set, are returned or saved as the output.
+   1. **Collecting Results**: The matched edges are collected from the algorithm's execution.
+   2. **Output**: The matched edges, which now form the maximal matching set, are returned or saved as the output.
 
 ## Code Compile
 
