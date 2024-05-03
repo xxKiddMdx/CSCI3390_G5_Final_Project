@@ -66,10 +66,16 @@ spark-submit --master "local[*]" --driver-memory 20G --executor-memory 20G --con
  ```
 spark-submit --master "local[*]" --driver-memory 20G --executor-memory 20G --conf "spark.executor.memoryOverhead=1024" --conf "spark.driver.maxResultSize=4g" --conf "spark.network.timeout=600s" --conf "spark.executor.heartbeatInterval=120s" --class "final_project.main" target/scala-2.12/project_3_2.12-1.0.jar verify [path_to_graph] [path_to_output]
  ```
- 
+
 ## Result
-
-
+| Algorithm | log_normal_100.csv | musae_ENGB_edges.csv | soc-pokec-relationships.csv | soc-LiveJournal1.csv | twitter_original_edges.csv | com-orkut.ungraph.csv |
+|-----------|---------------------|----------------------|------------------------------|-----------------------|----------------------------|-----------------------|
+| MaximalMatching Reported | 50 | 2460 | 584490 | 1527497 | 91747 | 1321378 |
+| MaximalMatching Verified | 50 | 2460 | 584490 | 1527497 | 91747 | 1321378 |
+| MaximalMatching Time Consumption | 0.22s in local machine | 0.32s in local machine | 9s in local machine | 21s in local machine (16GB) | 17s in local machine (16GB) | 46s in local machine (20GB) |
+| Greedy Reported | 50 | 2266 | 588210 | 1545781 | 91782 | 1325656 |
+| Greedy Verified | 50 | 2266 | 588210 | 1545781 | 91782 | 1325656 |
+| Greedy Time Consumption | 0.20s in local machine | 0.27s in local machine | 3s in local machine | 6s in local machine (16GB) | 9s in local machine (16GB) | 14s in local machine (20GB) |
 
 
 ## Advantages
