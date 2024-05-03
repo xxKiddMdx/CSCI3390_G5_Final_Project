@@ -5,11 +5,12 @@
 
 ### Blossom Algorithm
 
-* At first, based on the research, we were planning to implement the Blossom Algorithm for the matching. The Blossom algorithm effectively computes maximum matchings for graphs represented in input files, where each line details an undirected edge between two vertices. Upon reading the graph data, the algorithm operates by identifying "blossoms," which are odd cycles within the graph that need to be contracted to simplify the structure. Through iterative processing, it searches for augmenting paths that can increase the size of the existing matching. By repeatedly applying these steps—contracting blossoms and finding augmenting paths—the algorithm ensures the matching is as large as possible, leveraging advanced graph theory techniques to handle complex graph structures efficiently. However, as we learned and tested it out, the whole process consumes a huge amount of time, which has the O(n^3). 
+* At first, based on the research, we were planning to implement the Blossom Algorithm for the matching. The Blossom algorithm effectively computes maximum matchings for graphs represented in input files, where each line details an undirected edge between two vertices. Upon reading the graph data, the algorithm operates by identifying "blossoms," which are odd cycles within the graph that need to be contracted to simplify the structure. Through iterative processing, it searches for augmenting paths that can increase the size of the existing matching. By repeatedly applying these steps—contracting blossoms and finding augmenting paths—the algorithm ensures the matching is as large as possible, leveraging advanced graph theory techniques to handle complex graph structures efficiently. However, as we learned and tested it out, the whole process consumes a huge amount of time, which has the O(n^3). Therefore, we cannot implement it.
 
 ### LubyMIS (O(logE))
 
 * The LubyMIS algorithm operates by having each node in the graph randomly select itself with a certain probability, while simultaneously checking if its neighbors have also chosen themselves. If a node selects itself and none of its neighbors do, it joins the independent set. This decision is communicated to all neighboring nodes to prevent them from joining the set if they haven’t already made the same decision. This process repeats in synchronous rounds across the entire graph, with nodes that have not yet decided to continue to select themselves randomly. The algorithm typically converges quickly, within O(logn) rounds, producing a maximal independent set efficiently.
+* We tried to implement it from the base of project 3 but didn't complete it. 
 
 ### Maximal Matching (O(E+V)):
 1. ```maximalMatching(graph: Graph[Int, Int]): List[(Long, Long)]```
