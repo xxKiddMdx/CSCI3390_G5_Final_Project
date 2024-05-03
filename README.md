@@ -17,19 +17,25 @@
 1. ```maximalMatching(graph: Graph[Int, Int]): List[(Long, Long)]```
 
 **Purpose**: Finds a maximal matching in a graph.
+
 **Method**: Collects all edges, filters by unmatched vertex pairs, and maintains a set of matched vertices.
+
 **Output**: List of edges that form the maximal matching.
 
 2. ```saveMatching(matching: List[(Long, Long)], outputFile: String)```
 
 **Purpose**: Saves the matching to a CSV file.
+
 **Method**: Converts matching list to DataFrame, then writes to file using DataFrame operations.
+
 **Output**: CSV file containing the matching pairs.
 
 4. ```verifyMatching(graph: Graph[Int, Int]): Boolean```
 
 **Purpose**: Verifies if the matching is independent and maximal.
+
 **Method**: Uses flatMap to check for independent edges and join operations to ensure all unmatched vertices are adjacent to matched vertices.
+
 **Output**: Boolean indicating if the matching meets criteria.
 
 ### Greedy Algorithm (O(ElogE)) : 
