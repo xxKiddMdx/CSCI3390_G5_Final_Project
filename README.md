@@ -33,16 +33,16 @@
 ### Greedy Algorithm (O(ElogE)) : 
 * The Greedy Matching algorithm works as follows:
 * Initialization
-1. **Vertex Tracking**: A data structure is initialized to keep track of which vertices have been matched. This structure is crucial for ensuring that no vertex is part of more than one matching edge.
-2. **Edge Sorting**: The input graph is preprocessed to sort its edges in a randomized order. This preprocessing ensures each execution of the algorithm can yield different results and prevents any inherent bias in the order of the edges.
+   1. **Vertex Tracking**: A data structure is initialized to keep track of which vertices have been matched. This structure is crucial for ensuring that no vertex is part of more than one matching edge.
+   2. **Edge Sorting**: The input graph is preprocessed to sort its edges in a randomized order. This preprocessing ensures each execution of the algorithm can yield different results and prevents any inherent bias in the order of the edges.
 
 * Processing the Edges
-1. The algorithm processes each edge from the sorted list one by one.
-2. For each edge:
-   - **Vertex Check**: The source and destination vertices of the edge are checked to see if they have been matched.
-   - **Edge Matching**: If both vertices are unmatched, the edge is eligible to be part of the matching:
-     - The edge is added to the final matching result.
-     - Both vertices are marked as matched so they cannot be part of any subsequent edges.
+   1. The algorithm processes each edge from the sorted list one by one.
+   2. For each edge:
+      - **Vertex Check**: The source and destination vertices of the edge are checked to see if they have been matched.
+      - **Edge Matching**: If both vertices are unmatched, the edge is eligible to be part of the matching:
+        - The edge is added to the final matching result.
+        - Both vertices are marked as matched so they cannot be part of any subsequent edges.
 
 * Result Compilation
 1. **Collecting Results**: The matched edges are collected from the algorithm's execution.
